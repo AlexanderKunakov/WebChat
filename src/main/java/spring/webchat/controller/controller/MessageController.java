@@ -1,9 +1,9 @@
-package spring.webchat.controller;
+package spring.webchat.controller.controller;
 
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
-import spring.webchat.Message;
+import spring.webchat.model.pojo.Message;
 
 @Controller
 public class MessageController {

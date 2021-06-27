@@ -1,18 +1,18 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.thymeleaf.org " xmlns="http://www.w3.org/1999/html">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html>
 <body>
+<h1>Register form</h1>
+<form action="@{/add}" th:object="${user}" method="POST" enctype="utf8">
+    <div>
+        <label>username</label>
+        <input type="text" class="form-control" th:field="*{user.setUsername(param)}"/>
+    </div>
+    <div>
+        <label>password</label>
+        <input type="text" class="form-control" th:field="*{user.setPassword(param)}"/>
+    </div>
+    <button type="submit">submit</button>
+</form>
 
-<input name="name" aria-valuetext="Name" placeholder="Name">
-</br>
-</br>
-<input name="password" aria-valuetext="Name" placeholder="Password">
-</br>
-</br>
-<button type="submit">Зарегистрироваться</button>
+<a th:href="@{/login}">login</a>
 </body>
 </html>
