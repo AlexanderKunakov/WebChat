@@ -1,4 +1,4 @@
-package spring.webchat.model;
+package spring.webchat.model.config;
 
 import java.util.Properties;
 import javax.sql.DataSource;
@@ -13,25 +13,28 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 public class HibernateConfig {
+  private static final String DRIVER = "org.postgresql.Driver";
+  private static final String JDBC_URL = "jdbc:postgresql://localhost:5432/postgres";
+  private static final String USERNAME = "postgres";
+  private static final String PASSWORD = "postgres";
+  private static final String PACKAGE = "spring/webchat/model/entity";
 
   @Bean
   public LocalSessionFactoryBean sessionFactory() {
-    LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-    sessionFactory.setDataSource(dataSource());
-    sessionFactory.setPackagesToScan(
-        "spring/webchat/model/entity");
-    sessionFactory.setHibernateProperties(hibernateProperties());
-
-    return sessionFactory;
+    LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
+    localSessionFactoryBean.setDataSource(dataSource());
+    localSessionFactoryBean.setPackagesToScan(PACKAGE);
+    localSessionFactoryBean.setHibernateProperties(hibernateProperties());
+    return localSessionFactoryBean;
   }
 
   @Bean
   public DataSource dataSource() {
     BasicDataSource dataSource = new BasicDataSource();
-    dataSource.setDriverClassName("org.postgresql.Driver");
-    dataSource.setUrl("jdbc:postgresql://localhost:5432/postgres");
-    dataSource.setUsername("postgres");
-    dataSource.setPassword("postgres");
+    dataSource.setDriverClassName(DRIVER);
+    dataSource.setUrl(JDBC_URL);
+    dataSource.setUsername(USERNAME);
+    dataSource.setPassword(PASSWORD);
     return dataSource;
   }
 
@@ -46,9 +49,7 @@ public class HibernateConfig {
   private Properties hibernateProperties() {
     Properties hibernateProperties = new Properties();
     hibernateProperties.setProperty(
-        "hibernate.hbm2ddl.auto", "create-drop");
-    hibernateProperties.setProperty(
-        "hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+        "hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
     return hibernateProperties;
   }
 

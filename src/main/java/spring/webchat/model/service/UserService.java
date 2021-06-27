@@ -1,8 +1,8 @@
-package spring.webchat.model.dao;
+package spring.webchat.model.service;
 
 import spring.webchat.model.entity.User;
 
-public interface UserDao {
+public interface UserService {
 
   void add(User user);
 

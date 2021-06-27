@@ -1,4 +1,4 @@
-package spring.webchat;
+package spring.webchat.model.pojo;
 
 import lombok.Data;
 
