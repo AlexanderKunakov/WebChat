@@ -57,7 +57,7 @@ public class User {
     this.password = password;
   }
 
-  public Role getRole() {
+  public Role   getRole() {
     return role;
   }
 

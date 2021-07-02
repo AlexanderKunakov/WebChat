@@ -1,4 +1,4 @@
-package spring.webchat.controller.api;
+package spring.webchat.controller.controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,11 +15,10 @@ import spring.webchat.model.entity.User;
 
 @RestController
 @RequestMapping("/api/v1/user")
-public class UserApi {
+public class UserRestController {
   private UserService userService;
 
-  @PostMapping("/add")
-  @PreAuthorize("hasAuthority({'ADMIN'})")
+  @PostMapping()
   public String addUser(@ModelAttribute("user") User user) {
     userService.add(user);
     return user.toString();

@@ -18,12 +18,12 @@ public class Role {
   public Role() {
   }
 
-  public Role(int id, String role) {
-    this.id = id;
+  public Role(String role) {
     this.role = role;
   }
 
-  public Role(String role) {
+  public Role(int id, String role) {
+    this.id = id;
     this.role = role;
   }
 
@@ -35,7 +35,7 @@ public class Role {
   @Column(name = "role")
   private String role;
 
-  public Set<SimpleGrantedAuthority> simpleGrantedAuthority() {
+  public Set<SimpleGrantedAuthority> getAuthorities() {
     Set<SimpleGrantedAuthority> set = new HashSet<>();
     set.add(new SimpleGrantedAuthority(role));
     return set;

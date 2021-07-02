@@ -34,7 +34,7 @@ function sendMessage() {
     stompClient.send("/app/message", {}, JSON.stringify(
         {
             'message': $("#type-field").val(),
-            'from': $("#from-field").val()
+            'from': document.getElementById("from-field").innerText
         }
         )
     )

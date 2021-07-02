@@ -1,8 +1,6 @@
 package spring.webchat.model.dao;
 
-import lombok.SneakyThrows;
 import org.hibernate.SessionFactory;
-import org.omg.CORBA.UnknownUserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import spring.webchat.model.entity.User;
@@ -31,15 +29,10 @@ public class UserDaoImpl implements UserDao {
         .get();
   }
 
-  @SneakyThrows
   @Override
   public void delete(int id) {
     User user = sessionFactory.getCurrentSession().get(User.class, id);
-    if (user != null) {
-      sessionFactory.getCurrentSession().delete(user);
-    } else {
-      throw new UnknownUserException();
-    }
+    sessionFactory.getCurrentSession().delete(user);
   }
 
   @Autowired

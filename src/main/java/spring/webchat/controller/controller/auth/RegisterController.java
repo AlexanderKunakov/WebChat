@@ -1,7 +1,7 @@
-package spring.webchat.view;
+package spring.webchat.controller.controller.auth;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import spring.webchat.model.entity.User;
 
@@ -9,10 +9,7 @@ import spring.webchat.model.entity.User;
 public class RegisterController {
 
   @RequestMapping("/register")
-  public String register(Model model) {
-    User user = new User();
-
-    model.addAttribute("user", user);
+  public String register(@ModelAttribute("user") User user) {
     return "register";
   }
 

@@ -1,4 +1,4 @@
-package spring.webchat.controller.controller;
+package spring.webchat.controller.controller.chat;
 
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;

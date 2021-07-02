@@ -6,22 +6,21 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import spring.webchat.model.dao.UserDao;
-import spring.webchat.model.entity.User;
+import spring.webchat.model.service.UserService;
 
-@Service
+@Service("userDetailsServiceImpl")
 public class UserDetailsServiceImpl implements UserDetailsService {
-  private UserDao userDao;
+  private UserService userService;
 
   @Override
   @Transactional(readOnly = true)
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    User user = userDao.getByUsername(username);
-    return SecurityUser.convertFromUser(user);
+    return SecurityUser.convertFromUser(userService.getByUsername(username));
   }
 
   @Autowired
-  public void setUserDao(UserDao userDao) {
-    this.userDao = userDao;
+  public void setUserService(UserService userService) {
+    this.userService = userService;
   }
+
 }

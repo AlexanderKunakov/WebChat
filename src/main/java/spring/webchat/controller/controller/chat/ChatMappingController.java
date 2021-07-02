@@ -1,22 +1,16 @@
-package spring.webchat.controller.controller;
+package spring.webchat.controller.controller.chat;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class ChatMappingController {
 
-  @RequestMapping("/")
+  @GetMapping("/")
   @PreAuthorize("hasAnyAuthority({'ADMIN', 'USER'})")
   public String generalChat() {
     return "index";
-  }
-
-  @RequestMapping("/chat")
-  @PreAuthorize("hasAuthority('ADMIN')")
-  public String chat() {
-    return "chat";
   }
 
 }

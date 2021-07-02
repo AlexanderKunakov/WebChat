@@ -1,30 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.thymeleaf.org " xmlns="http://www.w3.org/1999/html">
+      xsi:schemaLocation="http://www.thymeleaf.org " xmlns="http://www.w3.org/1999/html"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Chat</title>
     <script src="script.js"></script>
     <script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
     <script src="/webjars/sockjs-client/1.5.1/sockjs.min.js"></script>
     <script src="/webjars/stomp-websocket/2.3.4/stomp.min.js"></script>
 </head>
 <body>
-<ul class="messages"></ul>
-<label for="from-field">Name</label><input id="from-field" placeholder="Type your name here">
-<label for="type-field">Message</label><input id="type-field" placeholder="Type your message here">
-<button onclick="sendMessage()">Send message</button>
-<button onclick="connect()">Connect</button>
-<button onclick="disconnect()">Disconnect</button>
+<div sec:authorize="isAuthenticated()">
+    <h1>Hello, <span id="from-field" sec:authentication="name"></span></h1>
+    <p>
+        <label for="type-field">Message </label><input id="type-field" placeholder="Type your message here">
+    </p>
+    <p>
+        <button onclick="sendMessage()">Send message</button>
+    </p>
+    <p>
+        <button onclick="connect()">Connect</button>
+        <button onclick="disconnect()">Disconnect</button>
+    </p>
 
-<div id="message_template">
-    <li class="message">
-        <div class="text_wrapper">
-            <div class="from"></div>
-            <div class="text"></div>
-        </div>
-    </li>
+    <p>
+        <a th:href="@{/logout}">
+            <button>Logout</button>
+        </a>
+    </p>
+    <div id="message_template">
+        <li class="message">
+            <div class="text_wrapper">
+                <div style="font-weight: bold" class="from"></div>
+                <div class="text"></div>
+            </div>
+        </li>
+    </div>
 </div>
-
+<div>
+    <ul class="messages"></ul>
+</div>
 </body>
 </html>

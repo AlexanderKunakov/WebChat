@@ -1,18 +1,30 @@
-<html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org " xmlns="http://www.w3.org/1999/html"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
 <body>
 <h1>Register form</h1>
-<form action="@{/add}" th:object="${user}" method="POST" enctype="utf8">
-    <div>
-        <label>username</label>
-        <input type="text" class="form-control" th:field="*{user.setUsername(param)}"/>
-    </div>
-    <div>
-        <label>password</label>
-        <input type="text" class="form-control" th:field="*{user.setPassword(param)}"/>
-    </div>
-    <button type="submit">submit</button>
+<form th:method="POST" th:action="@{/api/v1/user}">
+    <p>
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Username" required="" autofocus="">
+    </p>
+    <p>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Password" required="">
+    </p>
+    <p>
+        <button type="submit">Submit</button>
+    </p>
 </form>
-
-<a th:href="@{/login}">login</a>
+<p>
+    <a th:href="@{/login}">
+        <button type="button">Login</button>
+    </a>
+</p>
 </body>
 </html>

@@ -3,6 +3,7 @@ package spring.webchat.model.config;
 import java.util.Properties;
 import javax.sql.DataSource;
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
@@ -13,17 +14,26 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 public class HibernateConfig {
-  private static final String DRIVER = "org.postgresql.Driver";
-  private static final String JDBC_URL = "jdbc:postgresql://localhost:5432/postgres";
-  private static final String USERNAME = "postgres";
-  private static final String PASSWORD = "postgres";
-  private static final String PACKAGE = "spring/webchat/model/entity";
+  @Value("${spring.datasource.driver-class-name}")
+  private String driver;
+
+  @Value("${spring.datasource.url}")
+  private String jdbcUrl;
+
+  @Value("${spring.datasource.username}")
+  private String username;
+
+  @Value("${spring.datasource.password}")
+  private String password;
+
+  @Value("${datasource.package.to.scan}")
+  private String packageToScan;
 
   @Bean
   public LocalSessionFactoryBean sessionFactory() {
     LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
     localSessionFactoryBean.setDataSource(dataSource());
-    localSessionFactoryBean.setPackagesToScan(PACKAGE);
+    localSessionFactoryBean.setPackagesToScan(packageToScan);
     localSessionFactoryBean.setHibernateProperties(hibernateProperties());
     return localSessionFactoryBean;
   }
@@ -31,10 +41,10 @@ public class HibernateConfig {
   @Bean
   public DataSource dataSource() {
     BasicDataSource dataSource = new BasicDataSource();
-    dataSource.setDriverClassName(DRIVER);
-    dataSource.setUrl(JDBC_URL);
-    dataSource.setUsername(USERNAME);
-    dataSource.setPassword(PASSWORD);
+    dataSource.setDriverClassName(driver);
+    dataSource.setUrl(jdbcUrl);
+    dataSource.setUsername(username);
+    dataSource.setPassword(password);
     return dataSource;
   }
 
