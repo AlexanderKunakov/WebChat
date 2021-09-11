@@ -1,4 +1,4 @@
-package spring.webchat.controller.controller.chat;
+package spring.webchat.controller.controller;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -12,5 +12,4 @@ public class ChatMappingController {
   public String generalChat() {
     return "index";
   }
-
 }

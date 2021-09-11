@@ -30,15 +30,6 @@ public class HibernateConfig {
   private String packageToScan;
 
   @Bean
-  public LocalSessionFactoryBean sessionFactory() {
-    LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
-    localSessionFactoryBean.setDataSource(dataSource());
-    localSessionFactoryBean.setPackagesToScan(packageToScan);
-    localSessionFactoryBean.setHibernateProperties(hibernateProperties());
-    return localSessionFactoryBean;
-  }
-
-  @Bean
   public DataSource dataSource() {
     BasicDataSource dataSource = new BasicDataSource();
     dataSource.setDriverClassName(driver);
@@ -46,21 +37,6 @@ public class HibernateConfig {
     dataSource.setUsername(username);
     dataSource.setPassword(password);
     return dataSource;
-  }
-
-  @Bean
-  public PlatformTransactionManager hibernateTransactionManager() {
-    HibernateTransactionManager transactionManager
-        = new HibernateTransactionManager();
-    transactionManager.setSessionFactory(sessionFactory().getObject());
-    return transactionManager;
-  }
-
-  private Properties hibernateProperties() {
-    Properties hibernateProperties = new Properties();
-    hibernateProperties.setProperty(
-        "hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-    return hibernateProperties;
   }
 
 }

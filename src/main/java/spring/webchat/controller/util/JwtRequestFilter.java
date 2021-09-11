@@ -1,11 +1,7 @@
-package spring.webchat.controller.util.security;
+package spring.webchat.controller.util;
 
-import java.io.IOException;
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,10 +12,18 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@RequiredArgsConstructor
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
+
   private UserDetailsService userDetailsService;
-  private JwtUtil jwtUtil;
+  private final JwtUtil jwtUtil;
 
   @Override
   protected void doFilterInternal(HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain chain) throws ServletException, IOException {
@@ -48,11 +52,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
   @Qualifier("userDetailsServiceImpl")
   public void setUserDetailsService(UserDetailsService userDetailsService) {
     this.userDetailsService = userDetailsService;
-  }
-
-  @Autowired
-  public void setJwtUtil(JwtUtil jwtUtil) {
-    this.jwtUtil = jwtUtil;
   }
 
 }

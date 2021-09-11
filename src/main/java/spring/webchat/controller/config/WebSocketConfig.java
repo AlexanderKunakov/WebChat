@@ -1,4 +1,4 @@
-package spring.webchat.controller.config.socket;
+package spring.webchat.controller.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
