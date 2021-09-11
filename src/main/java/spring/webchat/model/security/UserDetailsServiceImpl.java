@@ -1,27 +1,22 @@
 package spring.webchat.model.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import spring.webchat.model.dao.UserDao;
-import spring.webchat.model.entity.User;
+import spring.webchat.model.service.UserService;
 
-@Service
+@RequiredArgsConstructor
+@Service("userDetailsServiceImpl")
 public class UserDetailsServiceImpl implements UserDetailsService {
-  private UserDao userDao;
+  private final UserService userService;
 
   @Override
   @Transactional(readOnly = true)
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    User user = userDao.getByUsername(username);
-    return SecurityUser.convertFromUser(user);
+    return SecurityUser.convertFromUser(userService.getByUsername(username));
   }
 
-  @Autowired
-  public void setUserDao(UserDao userDao) {
-    this.userDao = userDao;
-  }
 }

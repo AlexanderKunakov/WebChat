@@ -1,12 +1,13 @@
 package spring.webchat.model.security;
 
-import java.util.Collection;
-import java.util.List;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import spring.webchat.model.entity.User;
+import spring.webchat.model.entity.UserEntity;
+
+import java.util.Collection;
+import java.util.List;
 
 @Data
 public class SecurityUser implements UserDetails {
@@ -57,11 +58,11 @@ public class SecurityUser implements UserDetails {
     return isActive;
   }
 
-  public static UserDetails convertFromUser(User user) {
+  public static UserDetails convertFromUser(UserEntity userEntity) {
     return new org.springframework.security.core.userdetails.User(
-        user.getUsername(),
-        user.getPassword(),
-        user.getRole().simpleGrantedAuthority()
+            userEntity.getUsername(),
+            userEntity.getPassword(),
+            userEntity.getRoleEntity().getAuthorities()
     );
   }
 }

@@ -1,15 +1,15 @@
 package spring.webchat.model.service;
 
-import spring.webchat.model.entity.User;
+import spring.webchat.model.entity.UserEntity;
 
 public interface UserService {
 
-  void add(User user);
+    void add(UserEntity userEntity);
 
-  User getById(int id);
+    UserEntity getById(long id);
 
-  User getByUsername(String username);
+    UserEntity getByUsername(String username);
 
-  void delete(int id);
+  void delete(long id);
 
 }

@@ -14,5 +14,4 @@ public class MessageController {
     System.out.println("From " + message.getFrom() + ": " + message.getMessage());
     return message;
   }
-
 }

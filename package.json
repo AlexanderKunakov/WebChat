@@ -2,10 +2,14 @@
   "name": "WebChat",
   "version": "1.0.0",
   "dependencies": {
+    "@angular/common": "^12.1.0",
     "@types/sockjs-client": "^1.5.0",
     "net": "^1.0.2",
+    "rxjs": "^7.1.0",
     "sockjs-client": "^1.5.1",
     "stompjs": "^2.3.3"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@angular/core": "^12.1.0"
+  }
 }

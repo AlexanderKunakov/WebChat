@@ -1,52 +1,48 @@
 package spring.webchat.model.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import spring.webchat.model.dao.UserDao;
-import spring.webchat.model.entity.Role;
-import spring.webchat.model.entity.User;
+import spring.webchat.model.entity.RoleEntity;
+import spring.webchat.model.entity.UserEntity;
+import spring.webchat.model.enums.RoleEnum;
+import spring.webchat.model.repository.UserRepository;
 
+@RequiredArgsConstructor
 @Service
 public class UserServiceImpl implements UserService {
-  private UserDao userDao;
-  private PasswordEncoder passwordEncoder;
+  private final UserRepository userRepository;
+  private final PasswordEncoder passwordEncoder;
 
   @Override
   @Transactional
-  public void add(User user) {
-    Role defaultRole = new Role(2, "USER");
-    user.setPassword(passwordEncoder.encode(user.getPassword()));
-    user.setRole(defaultRole);
-    userDao.add(user);
-  }
+  public void add(UserEntity userEntity) {
+    RoleEntity defaultUserRole = RoleEntity.builder().role(RoleEnum.USER).build();
+    userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+    userEntity.setRoleEntity(defaultUserRole);
 
-  @Override
-  @Transactional
-  public User getById(int id) {
-    return userDao.getById(id);
+    userRepository.save(userEntity);
   }
 
   @Override
   @Transactional
-  public User getByUsername(String username) {
-    return userDao.getByUsername(username);
+  public UserEntity getById(long id) {
+
+    return userRepository.findById(id).orElse(null);
   }
 
   @Override
   @Transactional
-  public void delete(int id) {
-    userDao.delete(id);
+  public UserEntity getByUsername(String username) {
+
+    return userRepository.findByUsername(username);
   }
 
-  @Autowired
-  public void setUserDao(UserDao userDao) {
-    this.userDao = userDao;
-  }
+  @Override
+  @Transactional
+  public void delete(long id) {
 
-  @Autowired
-  public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
-    this.passwordEncoder = passwordEncoder;
+    userRepository.deleteById(id);
   }
 }
