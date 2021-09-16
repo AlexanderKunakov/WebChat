@@ -21,12 +21,13 @@ import java.io.IOException;
 @RequiredArgsConstructor
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
-
   private UserDetailsService userDetailsService;
   private final JwtUtil jwtUtil;
 
   @Override
-  protected void doFilterInternal(HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain chain) throws ServletException, IOException {
+  protected void doFilterInternal(HttpServletRequest request,
+                                  @NonNull HttpServletResponse response,
+                                  @NonNull FilterChain chain) throws ServletException, IOException {
     final String authorizationHeader = request.getHeader("Authorization");
 
     String username = null;

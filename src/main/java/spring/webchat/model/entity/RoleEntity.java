@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import spring.webchat.model.enums.RoleEnum;
@@ -33,7 +32,7 @@ public class RoleEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
-  private int id;
+  private Long id;
 
   @Enumerated(STRING)
   @Column(name = "role")
